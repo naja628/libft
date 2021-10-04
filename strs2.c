@@ -29,7 +29,6 @@ char *ft_strnstr(const char *s, const char *to_find, size_t n)
 	{
 		if (to_find[i] == '\0')
 			return ((char *) s);
-		++s;
 		++i;
 	}
 	return (ft_strnstr(s + 1, to_find, n - 1));
