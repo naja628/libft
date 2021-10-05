@@ -3,24 +3,6 @@
 typedef unsigned char uchar;
 typedef unsigned int uint;
 
-void *ft_memset(void *b, int c, size_t len)
-{
-	uint i;
-
-	i = 0;
-	while (i < len)
-	{
-		*(unsigned char *)b + i = c;
-		++i;
-	}
-	return (b);
-}
-
-void ft_bzero(void *b, size_t n)
-{
-	ft_memset(b, 0, n);
-}
-
 void *ft_memcpy(void *dst, const void *src, size_t len)
 {
 	uint i;
@@ -28,7 +10,7 @@ void *ft_memcpy(void *dst, const void *src, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		*(uchar *)dst + i = *(uchar *)src + i;
+		*((uchar *)dst + i) = *((uchar *)src + i);
 		++i;
 	}
 	return (dst);
@@ -40,7 +22,7 @@ void *ft_memmove(void *dst, const void *src, size_t n)
 	{
 		while (n > 0)
 		{
-			*(uchar *)dst + n - 1 = *(uchar *)src + n - 1;
+			*((uchar *)dst + n - 1) = *((uchar *)src + n - 1);
 			--n;
 		}
 		return (dst);
@@ -56,9 +38,27 @@ void *ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (*(uchar *)s + i == (uchar) c)
+		if (*((uchar *)s + i) == (uchar) c)
 			return ((void *)s + i);
 	  ++i;
 	}
 	return (NULL);
 }	
+
+int ft_memcmp(const void *p1, const void *p2, size_t n)
+{
+	const uchar *chr_p1;
+	const uchar *chr_p2;
+
+	chr_p1 = p1;
+	chr_p2 = p2;
+	while (n != 0)
+	{
+		if (*chr_p1 == *chr_p2)
+			return (*chr_p1 - *chr_p2);
+		++chr_p1;
+		++chr_p2;
+		--n;
+	}
+	return (0);
+}
