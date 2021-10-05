@@ -41,14 +41,15 @@ size_t ft_strlcat(char *dest, const char *src, size_t sz)
 		++dest;
 		++count;
 	}
-	if (count == sz)  
-		return (count);
-	while (count + 1 < sz && *src)
+	if (*dest == 0)
 	{
-		*(dest++) = *(src++);
-		++count;
+		while (count + 1 < sz && *src)
+		{
+			*(dest++) = *(src++);
+			++count;
+		}
+		*dest = '\0';
 	}
-	*dest = '\0';
 	while (*src)
 	{
 		++src;
@@ -57,13 +58,19 @@ size_t ft_strlcat(char *dest, const char *src, size_t sz)
 	return (count);
 }
 
+
 char *ft_strchr(const char *s, int c)
 {
-	while (*s != c && *s)
+	while (*s)
+	{
+		if (*s == (char) c)
+			return ((char *) s);
 		++s;
-	if (*s == 0)
+	}
+	if ((char) c == '\0')
+		return ((char *) s);
+	else
 		return (NULL);
-	return ((char *) s);
 }
 
 char *ft_strrchr(const char *s, int c)
@@ -73,9 +80,11 @@ char *ft_strrchr(const char *s, int c)
 	last_instance = NULL;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char) c)
 			last_instance = (char *) s;
 		++s;
 	}
+	if ((char) c == '\0')
+		last_instance = (char *) s;
 	return (last_instance);
 }

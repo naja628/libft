@@ -10,7 +10,10 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
 		++s2;
 		--n;
 	}
-	return (0);
+	if (n != 0)
+		return (*s1 - *s2);
+	else
+		return (0);
 }
 
 char *ft_strnstr(const char *s, const char *to_find, size_t n)
