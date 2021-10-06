@@ -1,6 +1,4 @@
-tests for funs in strs2 and memmanip
-tripouille errors:
-	strchr 4 5
-	strncmp 10 14
-	strlcat 1 2 3 17
-	strnstr 2
+strnstr !!
+bonus 
+mapi 
+iteri 
