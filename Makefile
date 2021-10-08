@@ -19,6 +19,7 @@ bonus:$(NAME) $(BONUS)
 
 clean:
 	rm -f ${OBJ}
+	rm -f ${BONUS}
 
 fclean: clean
 	rm -f $(NAME)
