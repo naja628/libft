@@ -16,27 +16,28 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 }
 
-char *ft_strnstr(const char *s, const char *to_find, size_t n)
+char *ft_strnstr(const char* s, const char *to_find, size_t n)
 {
 	unsigned int i;
 
-	while (n != 0 && *s != *to_find) 
+	if (*to_find == '\0')
+		return ((char *) s);
+	while (*s && n > 0 && *to_find != *s)
 	{
-		++s;
 		--n;
+		++s;
 	}
-	if (n == 0 || *s == '\0')
+	if (*s == '\0' || n == 0)
 		return (NULL);
 	i = 1;
-	while (s[i] == to_find[i] && n - i != 0)
-	{
-		if (to_find[i] == '\0')
-			return ((char *) s);
+	while (s[i] && to_find[i] && n - i > 0 && to_find[i] == s[i])
 		++i;
-	}
-	return (ft_strnstr(s + 1, to_find, n - 1));
+	if (to_find[i] == '\0')
+		return ((char *) s);
+	else
+		return (ft_strnstr(s + 1, to_find, n - 1));
 }
-	
+
 #include <stdlib.h>
 
 size_t ft_strlen(const char *s);
