@@ -1,24 +1,39 @@
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strs2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 17:56:10 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 20:11:06 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strncmp(const char *s1, const char *s2, size_t n)
+#include <stddef.h>
+#include <stdlib.h>
+
+typedef unsigned char	t_uchar;
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	while (n != 0 && *s1)
 	{
 		if (*s1 != *s2)
-			return (*s1 - *s2);
+			return ((t_uchar)(*s1) - (t_uchar)(*s2));
 		++s1;
 		++s2;
 		--n;
 	}
 	if (n != 0)
-		return (*s1 - *s2);
+		return ((t_uchar)(*s1) - (t_uchar)(*s2));
 	else
 		return (0);
 }
 
-char *ft_strnstr(const char* s, const char *to_find, size_t n)
+char	*ft_strnstr(const char *s, const char *to_find, size_t n)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (*to_find == '\0')
 		return ((char *) s);
@@ -38,15 +53,13 @@ char *ft_strnstr(const char* s, const char *to_find, size_t n)
 		return (ft_strnstr(s + 1, to_find, n - 1));
 }
 
-#include <stdlib.h>
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dest, const char *src, size_t sz);
 
-size_t ft_strlen(const char *s);
-size_t ft_strlcpy(char *dest, const char *src, size_t sz);
-
-char *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-	size_t n;
-	char *dup;
+	size_t	n;
+	char	*dup;
 
 	n = ft_strlen(s);
 	dup = malloc(sizeof(char) * (n + 1));
@@ -56,10 +69,10 @@ char *ft_strdup(const char *s)
 	return (dup);
 }
 
-char *ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char *sub;
-	size_t s_len;
+	char	*sub;
+	size_t	s_len;
 
 	s_len = ft_strlen(s);
 	if (start > s_len)
@@ -76,14 +89,14 @@ char *ft_substr(const char *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-size_t ft_strlcat(char *dest, const char * src, size_t sz);
+size_t	ft_strlcat(char *dest, const char *src, size_t sz);
 
 /* note : using strlcat makes us unnecessarily pass through s1 twice
  * but I don't care */
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *concat;
-	size_t sz;
+	char	*concat;
+	size_t	sz;
 
 	sz = ft_strlen(s1) + ft_strlen(s2) + 1;
 	concat = malloc(sizeof(char) * sz);

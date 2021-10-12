@@ -1,17 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 14:09:05 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 15:58:52 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-static uint ft_abs (int n)
+typedef unsigned int	t_uint;
+
+static t_uint	ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
-	else 
+	else
 		return (n);
 }
 
-static size_t ft_writing_sz(int n)
+static size_t	ft_writing_sz(int n)
 {
-	size_t count;
-	uint abs;
+	size_t	count;
+	t_uint	abs;
 
 	count = 1;
 	abs = ft_abs(n);
@@ -25,7 +39,7 @@ static size_t ft_writing_sz(int n)
 	return (count);
 }
 
-static char* ft_itoa_helper(uint n, char *units_place)
+static char	*ft_itoa_helper(t_uint n, char *units_place)
 {
 	if (n < 10)
 	{
@@ -36,11 +50,11 @@ static char* ft_itoa_helper(uint n, char *units_place)
 	return (ft_itoa_helper(n / 10, units_place - 1));
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	size_t sz;
-	uint abs;
-	char *written_num;
+	size_t	sz;
+	t_uint	abs;
+	char	*written_num;
 
 	sz = ft_writing_sz(n);
 	abs = ft_abs(n);

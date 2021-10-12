@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lists1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 16:32:20 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 16:33:49 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdlib.h>
 
-t_list *ft_lstnew(void *content)
+t_list	*ft_lstnew(void *content)
 {
-	t_list *createme;
+	t_list	*createme;
 
 	createme = malloc(sizeof(t_list));
 	if (!createme)
@@ -13,20 +25,20 @@ t_list *ft_lstnew(void *content)
 	return (createme);
 }
 
-void ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	new->next = *lst;
 	*lst = new;
 }
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	if (lst == NULL)
 		return (0);
 	return (1 + ft_lstsize(lst -> next));
 }
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -35,10 +47,10 @@ t_list *ft_lstlast(t_list *lst)
 	return (ft_lstlast(lst->next));
 }
 
-void ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	if (*lst != NULL)
 		ft_lstadd_back(&(*lst)->next, new);
-	else 
+	else
 		*lst = new;
 }

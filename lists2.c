@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lists2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 16:33:53 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 18:36:24 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft.h"
 
-void ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (lst == NULL)
 		return ;
@@ -9,17 +21,16 @@ void ft_lstdelone(t_list *lst, void (*del)(void *))
 	free(lst);
 }
 
-void ft_lstclear(t_list **lst, void (*del) (void *))
+void	ft_lstclear(t_list **lst, void (*del) (void *))
 {
-
 	if (*lst == NULL)
 		return ;
-	ft_lstclear(&(*lst) -> next, del);
+	ft_lstclear(&(*lst)->next, del);
 	ft_lstdelone(*lst, del);
 	*lst = NULL;
 }
 
-void ft_lstiter(t_list *lst, void (*f) (void *))
+void	ft_lstiter(t_list *lst, void (*f) (void *))
 {
 	if (lst == NULL)
 		return ;
@@ -27,13 +38,13 @@ void ft_lstiter(t_list *lst, void (*f) (void *))
 	ft_lstiter(lst -> next, f);
 }
 
-t_list *ft_lstnew(void *content);
-void ft_lstadd_front(t_list **lst, t_list *new);
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
-static t_list *ft_lstmap_helper(t_list *lst, void *(*f)(void *), int *err)
+static t_list	*ft_lstmap_helper(t_list *lst, void *(*f)(void *), int *err)
 {
-	t_list *image;
-	t_list *new_cell;
+	t_list	*image;
+	t_list	*new_cell;
 
 	*err = 0;
 	if (lst == NULL)
@@ -49,10 +60,10 @@ static t_list *ft_lstmap_helper(t_list *lst, void *(*f)(void *), int *err)
 	return (image);
 }
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int err;
-	t_list *image;
+	int		err;
+	t_list	*image;
 
 	err = 0;
 	image = ft_lstmap_helper(lst, f, &err);
@@ -61,9 +72,6 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		ft_lstclear(&image, del);
 		return (NULL);
 	}
-	else 
+	else
 		return (image);
 }
-
-
-		

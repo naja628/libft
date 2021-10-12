@@ -1,31 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mem_manip2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 16:45:42 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 16:47:41 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stddef.h>
+#include<stdlib.h>
 
-typedef unsigned char uchar;
-typedef unsigned int uint;
+typedef unsigned char	t_uchar;
+typedef unsigned int	t_uint;
 
-void *ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	uint i;
+	t_uint	i;
 
 	i = 0;
 	while (i < len)
 	{
-		*((uchar *)b + i) = c;
+		*((t_uchar *)b + i) = c;
 		++i;
 	}
 	return (b);
 }
 
-void ft_bzero(void *b, size_t n)
+void	ft_bzero(void *b, size_t n)
 {
 	ft_memset(b, 0, n);
 }
 
-#include<stdlib.h>
-
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	void *p;
+	void	*p;
 
 	p = malloc(size * count);
 	if (!p)

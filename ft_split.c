@@ -1,67 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 19:23:47 by najacque          #+#    #+#             */
+/*   Updated: 2021/10/12 20:31:29 by najacque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-static void ft_setcounts(const char *s, char c, size_t *nbytes, size_t *nwords)
+typedef unsigned int	t_uint;
+
+size_t	ft_nwords(char const *s, char c)
 {
-	if (*s == c || *s == '\0')
-	{
-		*nbytes = 0;
-		*nwords = 0;
-		if (*s == '\0')
-			return ;
-	}
-	else
-	{	
-		*nbytes = 1;
-		*nwords = 1;
-	}
+	size_t	nwords;
+
+	nwords = 0;
+	if (*s == '\0')
+		return (nwords);
+	if (*s != c)
+		nwords = 1;
 	while (*(++s))
 	{
-		if (*s != c)
-		{
-			++(*nbytes);
-			if (*(s - 1) == c)
-				++(*nwords);
-		}
+		if (*s != c && *(s - 1) == c)
+			++nwords;
 	}
-	*nbytes += *nwords;
+	return (nwords);
 }
 
-static void ft_split_helper(char **pdest, char *dest, const char *src, char c)
+char	*ft_stream_create_word(char const **stream, char c)
 {
-	while (*src && *src == c)
-		++src;
-	if (*src == '\0')
-	{
-		*pdest = NULL;
+	t_uint	i;
+	char	*word;
+
+	while (**stream && **stream == c)
+		++(*stream);
+	if (**stream == '\0')
+		return (NULL);
+	i = 0;
+	while ((*stream)[i] && *(*stream + i) != c)
+		++i;
+	word = malloc(sizeof(char) * (i + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (**stream && **stream != c)
+		word[i++] = *((*stream)++);
+	word[i] = '\0';
+	return (word);
+}
+
+void	ft_free_tab(char **tab)
+{
+	char	**pos;
+
+	if (tab == NULL)
 		return ;
-	}
-	*pdest = dest;
-	while (*src && *src != c)
-		*(dest++) = *(src++);
-	*(dest++) = '\0';
-	ft_split_helper(pdest + 1, dest, src, c);
+	pos = tab;
+	while (*pos != NULL)
+		free(*(pos++));
+	free(tab);
 }
 
-char **ft_split(const char *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	size_t nbytes;
-	size_t nwords;
-	char *buff;
-	char **tab;
+	char	**tab;
+	size_t	nwords;
+	t_uint	i;
 
-	ft_setcounts(s, c, &nbytes, &nwords);
+	nwords = ft_nwords(s, c);
 	tab = malloc(sizeof(char *) * (nwords + 1));
 	if (!tab)
 		return (NULL);
-	if (nwords != 0)
+	i = 0;
+	while (i < nwords)
 	{
-		buff = malloc(sizeof(char) * nbytes);
-		if (!buff)
+		tab[i] = ft_stream_create_word(&s, c);
+		if (!tab[i])
 		{
-			free(tab);
+			ft_free_tab(tab);
 			return (NULL);
 		}
+		++i;
 	}
-	ft_split_helper(tab, buff, s, c);
+	tab[i] = NULL;
 	return (tab);
-}	
+}
