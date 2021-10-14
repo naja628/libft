@@ -10,36 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (lst == NULL)
-		return ;
-	del(lst->content);
-	free(lst);
-}
-
-void	ft_lstclear(t_list **lst, void (*del) (void *))
-{
-	if (*lst == NULL)
-		return ;
-	ft_lstclear(&(*lst)->next, del);
-	ft_lstdelone(*lst, del);
-	*lst = NULL;
-}
-
-void	ft_lstiter(t_list *lst, void (*f) (void *))
-{
-	if (lst == NULL)
-		return ;
-	f(lst -> content);
-	ft_lstiter(lst -> next, f);
-}
-
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
 
 static t_list	*ft_lstmap_helper(t_list *lst, void *(*f)(void *), int *err)
 {

@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-typedef unsigned int	t_uint;
+#include "libft.h"
 
 static t_uint	ft_abs(int n)
 {

@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
+
 
 typedef unsigned int	t_uint;
 
-size_t	ft_nwords(char const *s, char c)
+static size_t	ft_nwords(char const *s, char c)
 {
 	size_t	nwords;
 
@@ -31,7 +33,7 @@ size_t	ft_nwords(char const *s, char c)
 	return (nwords);
 }
 
-char	*ft_stream_create_word(char const **stream, char c)
+static char	*ft_stream_create_word(char const **stream, char c)
 {
 	t_uint	i;
 	char	*word;
@@ -53,7 +55,7 @@ char	*ft_stream_create_word(char const **stream, char c)
 	return (word);
 }
 
-void	ft_free_tab(char **tab)
+static void	ft_free_tab(char **tab)
 {
 	char	**pos;
 

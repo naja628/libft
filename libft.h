@@ -14,6 +14,9 @@
 # define LIBFT_H
 # include <stddef.h>
 
+typedef unsigned int	t_uint;
+typedef unsigned char	t_uchar;
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
