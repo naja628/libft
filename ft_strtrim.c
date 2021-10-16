@@ -6,13 +6,12 @@
 /*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 16:30:43 by najacque          #+#    #+#             */
-/*   Updated: 2021/10/12 20:08:49 by najacque         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:15:57 by najacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "libft.h"
-
 
 static int	ft_isin(const char *s, char c)
 {
@@ -30,6 +29,8 @@ char	*ft_strtrim(const char *s, const char *set)
 	unsigned int	start;
 	size_t			len;
 
+	if (s == NULL)
+		return (NULL);
 	start = 0;
 	while (ft_isin(set, s[start]))
 		++start;
