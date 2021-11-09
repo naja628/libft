@@ -32,9 +32,9 @@ int	ft_atoi(const char *s)
 	acc = 0;
 	while (ft_isdigit(*s))
 	{
-		if (acc > LONG_MAX && sign == -1)
+		if (acc > -(t_ull) LONG_MIN && sign == -1)
 			return (0);
-		if (acc > (t_ull)(-LONG_MIN) && sign == 1)
+		if (acc > (t_ull) LONG_MAX && sign == 1)
 			return (-1);
 		acc *= 10;
 		acc += *s - '0';

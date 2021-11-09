@@ -16,6 +16,8 @@ char	*ft_strnstr(const char *s, const char *to_find, size_t n)
 {
 	unsigned int	i;
 
+	if (!s || !to_find)
+		return ((char *) s);
 	if (*to_find == '\0')
 		return ((char *) s);
 	while (*s && n > 0 && *to_find != *s)

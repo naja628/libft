@@ -15,6 +15,8 @@
 
 static int	ft_isin(const char *s, char c)
 {
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (*s == c)
@@ -29,7 +31,7 @@ char	*ft_strtrim(const char *s, const char *set)
 	unsigned int	start;
 	size_t			len;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	start = 0;
 	while (ft_isin(set, s[start]))
